@@ -1,0 +1,99 @@
+def minuteDillema(array):
+    dictionary = {}
+    count = 0
+    for i in range(len(array)):
+        current_length = array[i]
+        looking_for = 60 - array[i] % 60
+        if looking_for in dictionary:
+            count += 1
+        else:
+            dictionary[array[i] % 60] = True
+
+    print(dictionary)
+    return count
+
+print(minuteDillema([40,20,90,90,60,0]))
+
+
+def closestNumber(array):
+
+    array.sort()
+    min_diff = float('inf')
+    list = []
+    for i in range(len(array)-1):
+        diff = array[i+1] - array[i]
+        min_diff = min(min_diff,diff)
+
+
+    for i in range(len(array)-1):
+        if (array[i+1]-array[i]) == min_diff:
+            list.append((array[i],array[i+1]))
+    return list
+
+print(closestNumber([6,2,4,10]))
+
+
+def firstUniqueCharacter(s):
+    dictionary = {}
+    array = list(s)
+    for i in range(len(array)):
+        if array[i] not in dictionary:
+            dictionary[array[i]] = 1
+        else:
+            dictionary[array[i]] += 1
+
+    for i in range(len(array)):
+        if dictionary[array[i]] == 1:
+            return i+1
+
+
+def positivePrefixes(array):
+    count = 0
+    array.sort()
+    array.reverse()
+    print(array)
+    sum = 0
+    for i in range(len(array)):
+        sum += array[i]
+        if sum > 0:
+            count += 1
+        else:
+            break
+
+    return count
+
+
+
+
+
+def hasVowels(strArr,query):
+    vowels = set(["a","e","i","o","u"])
+
+    array = []
+    sol = []
+
+    for element in strArr:
+        if element[0] in vowels and element[-1] in vowels:
+            array.append(1)
+        else:
+            array.append(0)
+
+    print(array)
+
+    for element in query:
+        start,end = element.split('-')
+        start = int(start)
+        end = int(end)
+        start -= 1
+        end -= 1
+        count = 0
+        for i in range(start, end + 1):
+            count += array[i]
+        sol.append(count)
+
+    return sol
+
+
+
+
+print(hasVowels(['aba','bcb','ece','aa','e'],['1-3','2-5','2-2']))
